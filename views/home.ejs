@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+        }
+
+        body {
+            font-family: Helvetica;
+            -webkit-font-smoothing: antialiased;
+            background:#7489ab;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: white;
+            padding: 30px 0;
+            margin: 0;
+        }
+
+        .input-form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .input-field {
+            width: 30%;
+            height: 30px;
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            width: 10%;
+            height: 30px;
+            border-radius: 4px;
+            overflow: hidden; /* Hide any overflowing text */
+    text-overflow: ellipsis; /* Display an ellipsis (...) when text overflows */
+    white-space: nowrap; /* Prevent text from wrapping */
+
+        }
+
+        /* Table Styles */
+        .table-wrapper {
+            margin: 20px;
+            box-shadow: 0px 35px 50px rgba(0, 0, 0, 0.2);
+            overflow-x: auto;
+        }
+
+        .fl-table {
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: normal;
+            border: none;
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 100%;
+            color: #ffffff;
+            white-space: nowrap;
+            background-color:  #33313f;
+        }
+
+        .fl-table td, .fl-table th {
+            text-align: center;
+            padding: 8px;
+        }
+
+        .fl-table td {
+            border-right: 1px solid #f8f8f8;
+            font-size: 12px;
+        }
+
+        .fl-table thead th {
+            color: #ffffff;
+            background: #436b7d;
+        }
+
+        .fl-table thead th:nth-child(odd) {
+            background: #324960;
+            color: #ffffff;
+        }
+
+        .fl-table tr:nth-child(even) {
+            background:  #33313f;
+            color: #ffffff;
+        }
+
+        /* Responsive */
+        
+        @media (max-width: 767px) {
+            .input-field {
+                width: 30%;
+            }
+
+            .btn {
+                width: 10%;
+            }
+
+            .fl-table td, .fl-table th {
+                padding: 12px;
+            }
+        }
+
+        @media (max-width: 479px) {
+            .input-field {
+                width: 100%;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+<h2>URL Shortener</h2>
+<div class="container">
+    <div class="input-form">
+        <form method="POST" action="/url/create">
+            <input type="text" class="input-field" name="url" placeholder="https://example.com"/>
+            <button class="btn" type="submit">Generate</button>
+        </form>
+        <% if (locals.id) { %>
+        <p>URL Generated : https://localhost:2004/url/<%= id %></p>
+        <% } %>
+    </div>
+    <div class="table-wrapper">
+        <table class="fl-table">
+            <thead>
+            <tr>
+                <th class="col col-1">S.No.</th>
+                <th class="col col-2">Short-id</th>
+                <th class="col col-3">redirect-URL</th>
+                <th class="col col-4">Clicks</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% if (locals.urls) { %>
+            <% var i=1; urls.forEach(url => { %>
+            <tr class="table-row">
+                <td><%= i %></td>
+                <td><%= url.shortId %></td>
+                <td><%= url.redirectUrl %></td>
+                <td><%= url.visitHistory.length %></td>
+                <%  i++%>
+            </tr>
+            <% }) %>
+            <% } %>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
