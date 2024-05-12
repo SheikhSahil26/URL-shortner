@@ -11,7 +11,7 @@ const urlSchema=new mongoose.Schema({
     required:true,
    },
    visitHistory:{
-    timestamp:{}
+      timestamp:{type:Number},
    },
    createdBy:{
       type:mongoose.Schema.Types.ObjectId,

@@ -24,9 +24,9 @@ app.set("view engine","ejs");  //telling that i am using ejs engine
 app.set("views",path.resolve("./views")); //telling that all my ejs files are in views folder
 
 //middleware
-app.use(express.json());
-app.use(express.urlencoded({extended:false}));
-app.use(cookieParser());
+app.use(express.json());     //to handle json input
+app.use(express.urlencoded({extended:false}));   //to handle form input
+app.use(cookieParser());   //parsing cookie
 
 //routes
 
